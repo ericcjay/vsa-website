@@ -403,3 +403,34 @@ header {
 .pagination a.active {
     background-color: #3e8e41;
 }
+
+/* Default (desktop) styles */
+body {
+  font-size: 16px;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+/* For tablets and smaller screens */
+@media (max-width: 768px) {
+  body {
+    font-size: 14px;
+  }
+  
+  /* Adjust other elements as needed */
+  .container {
+    flex-direction: column;
+  }
+}
+
+/* For small screens (phones) */
+@media (max-width: 480px) {
+  body {
+    font-size: 12px;
+  }
+  
+  /* More adjustments for mobile */
+  .container {
+    padding: 10px;
+  }
+}

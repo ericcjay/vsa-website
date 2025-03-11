@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VSA - Vietnamese Student Association at Sac State</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+  <header>
+    <div class="header-content">
+    <!-- Logo -->
+    <div class="logo">
+        <img src="images/vsa-logo.png" alt="VSA Logo" width="150">
+    </div>
+
+    <h1>Welcome to the Vietnamese Student Association at CSUS!</h1>
+    <nav>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="gallery.html">Gallery</a></li>
+        <li><a href="announcement.html">Events</a></li>
+        <li><a href="contact.html">Info</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <section class="intro">
+    <h2>Mission Statement</h2>
+    <p>The Vietnamese Student Association (VSA) is a student-run organization that seeks to promote the Vietnamese culture and provide a supportive community for students at CSUS.</p>
+    <p>We hold regular events, collaborate with other student organizations, and offer a space for students to connect with others who share a passion for Vietnamese culture.</p>
+  </section>
+
+  <!-- Image Slider -->
+  <div class="slider-container">
+    <div class="slider">
+      <img src="images/slider1.jpg" alt="Event 1" class="slide">
+      <img src="images/slider2.jpg" alt="Event 2" class="slide">
+      <img src="images/slider3.jpg" alt="Event 3" class="slide">
+      <img src="images/slider4.jpg" alt="Event 4" class="slide">
+      <img src="images/slider5.jpg" alt="Event 5" class="slide">
+    </div>
+    <button class="prev" onclick="moveSlide(-1)">&#10094;</button>
+    <button class="next" onclick="moveSlide(1)">&#10095;</button>
+  </div>
+
+  <section class="location">
+    <h2>Find Us!</h2>
+    <p>Our General Meetings are located at the Sac State Campus on Mendocino Hall Room 1015.<p>
+    </p>Here's how you can find us:</p>
+    <!-- Google Maps Embed -->
+    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3119.743762096426!2d-121.42355719999999!3d38.5627171!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x809ada8ca5476d5b%3A0xbbf9974433818cfa!2sMendocino%20Hall!5e0!3m2!1sen!2sus!4v1741660448992!5m2!1sen!2sus" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+  </section>
+  
+
+  <footer>
+    <p>&copy; Vietnamese Student Association at CSUS</p>
+  </footer>
+  <script src="script.js"></script> <!-- Link to JavaScript file -->
+</body>
+</html>

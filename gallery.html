@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VSA Gallery</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <header>
+    <div class="header-content">
+        <!-- Logo -->
+        <div class="logo">
+            <img src="images/vsa-logo.png" alt="VSA Logo" width="150">
+    <h1>Welcome to the VSA Photo Gallery!</h1>
+    <nav>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="gallery.html">Gallery</a></li>
+          <li><a href="announcement.html">Events</a></li>
+          <li><a href="contact.html">Info</a></li>
+        </ul>
+      </nav>
+    </header>
+
+<!-- Gallery Section -->
+<section class="gallery">
+    <h2>Our Memories</h2>
+    <div class="gallery-grid" id="gallery-grid">
+        <!-- Images will be inserted dynamically by JavaScript -->
+    </div>
+    
+</section>
+
+<!-- Modal for image zoom -->
+<div id="imageModal" class="modal">
+    <span class="close">&times;</span>
+    <img class="modal-content" id="modalImage">
+    <div id="modalDescription" class="description"></div>
+</div>
+
+<script src="script.js"></script>
+
+
+  <footer>
+    <p>&copy; Vietnamese Student Association at CSUS</p>
+  </footer>
+</body>
+</html>

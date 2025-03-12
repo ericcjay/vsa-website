@@ -404,9 +404,3 @@ header {
     background-color: #3e8e41;
 }
 
-/* Default (desktop) styles */
-body {
-  font-size: 16px;
-  display: flex;
-  flex-wrap: wrap;
-}

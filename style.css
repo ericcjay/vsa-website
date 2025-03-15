@@ -1,412 +1,134 @@
-/* Global Styles */
-body {
-  font-family: 'Roboto', sans-serif;   
-  margin: 0;                        
-  padding: 0;                      
-  background-color: #9eeeb2;       
-  color: #000000;                    
-  overflow-x: hidden; /* Prevent horizontal scrolling */
-}
+let slideIndex = 0; // Start from the first image
 
-/* Header Styles */
-header {
-  display: flex;
-  flex-direction: column; /* Stack the logo, title, and navigation links vertically */
-  justify-content: center; /* Vertically center the content */
-  align-items: center; /* Horizontally center the content */
-  text-align: center; /* Center the text */
-  padding: 10px; /* Padding around the content */
-  box-sizing: border-box; /* Ensure padding doesn't affect width/height */
-  background-color: #0a543b; /* Optional: background color for the header */
-  width: 100%; /* Ensure it takes the full width of the screen */
-}
+// Function to move the slide
+function moveSlide(n) {
+  const slides = document.querySelectorAll('.slide');
+  const totalSlides = slides.length;
 
-header .logo img {
-  width: 100%; /* Make logo responsive */
-  max-width: 300px; /* Set a max-width for the logo */
-  height: auto; /* Maintain aspect ratio */
-  margin-bottom: 10px; /* Space between logo and title */
-}
+  // Update slideIndex based on the button click
+  slideIndex += n;
 
-header h1 {
-  font-size: 3.5em; /* Adjust font size of title */
-  margin-bottom: 20px; /* Space between the title and navigation */
-  color: #ffffff;
-}
-
-header nav ul {
-  list-style-type: none; /* Remove default list styling */
-  padding: 0; /* Remove padding */
-  margin: 0; /* Remove margin */
-}
-
-header nav ul li {
-  font-family: 'Roboto', sans-serif;   
-  display: inline-block; /* Make links appear horizontally */
-  margin: 10px 20px; /* Add space between the navigation items */
-}
-
-header nav ul li a {
-  font-family: 'Roboto', sans-serif;   
-  text-decoration: none; /* Remove the underline from links */
-  font-size: 1.5em; /* Font size for links */
-  color: #ffffff; /* Text color */
-  padding: 10px 20px; /* Add padding to links */
-  border-radius: 5px; /* Optional: rounded corners */
-  background-color: #0a543b; /* Optional: background color for links */
-}
-
-header nav ul li a:hover {
-  background-color: #62a07a; /* Background color change on hover */
-  color: white; /* Text color change on hover */
-}
-
-/* About VSA Section Styles */
-.intro {
-  display: flex;
-  flex-direction: column; /* Align the content vertically */
-  justify-content: center; /* Vertically center content */
-  align-items: center; /* Horizontally center content */
-  text-align: center; /* Center the text inside */
-  height: auto; /* Adjust the height dynamically */
-  padding: 20px; /* Add some padding around content */
-  box-sizing: border-box; /* Ensure padding doesn’t affect total width/height */
-}
-
-.intro h1, .intro p {
-  margin: 0; /* Remove any default margin */
-  padding: 0; /* Remove any default padding */
-}
-
-.intro h1 {
-  font-size: 2.5em; /* Increase font size for the title */
-  margin-bottom: 20px; /* Space between the title and description */
-}
-
-.intro p {
-  font-size: 1.2em; /* Adjust font size for paragraphs */
-  line-height: 1.5; /* Adjust line height for readability */
-  max-width: 800px; /* Set a max width to control text line length */
-  margin: 0 auto; /* Center the paragraph */
-}
-
-/* Responsive Design for Screen Sizes */
-@media (max-width: 1024px) {
-  header h1 {
-    font-size: 2.5em; /* Smaller font size for medium screens */
+  // loop back to the first slide
+  if (slideIndex >= totalSlides) {
+    slideIndex = 0;
   }
 
-  header nav ul li {
-    font-size: 1.2em; /* Adjust link size for tablets */
+  // If we go before the first slide, go to the last slide
+  if (slideIndex < 0) {
+    slideIndex = totalSlides - 1;
   }
 
-  .intro h1, .intro p {
-    font-size: 1.5em; /* Adjust font size for content */
-  }
+  // Change the slide position using CSS transform property
+  document.querySelector('.slider').style.transform = `translateX(${-slideIndex * 100}%)`;
 }
 
-@media (max-width: 768px) {
-  header nav ul {
-    display: flex;
-    flex-direction: column; /* Stack navigation links vertically */
-  }
+// Automatic slide change every 3 seconds
+// setInterval(() => moveSlide(1), 3000); // Move to the next slide every 3 seconds
 
-  header nav ul li {
-    margin: 10px 0; /* Reduce space between links */
-  }
-
-  header h1 {
-    font-size: 2em; /* Smaller font size for mobile screens */
-  }
-
-  .intro h1, .intro p {
-    font-size: 1.2em; /* Adjust font size for small screens */
-  }
+function loadGoogleCalendarAPI() {
+    gapi.client.init({
+        apiKey: API_KEY,
+    }).then(function() {
+        fetchUpcomingEvents();
+    }).catch(function(error) {
+        console.error("Error initializing Google API:", error);
+    });
 }
 
-@media (max-width: 480px) {
-  header h1 {
-    font-size: 1.5em; /* Further reduce font size for very small screens */
-  }
-
-  header nav ul li {
-    font-size: 1em; /* Adjust font size for links */
-  }
-
-  .intro h1 {
-    font-size: 1.5em; /* Adjust font size */
-  }
-
-  .intro p {
-    font-size: 1em; /* Adjust font size for smaller screens */
-  }
+function handleClientLoad() {
+    gapi.load('client', loadGoogleCalendarAPI);
 }
 
-/* Image Slider Styles */
-.slider-container {
-  position: relative;
-  overflow: hidden;
-  border: 10px solid #0a543b;
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  width: 100%; /* Ensure the slider takes up the full width */
-  max-width: 1000px; /* Max width for the slider to prevent it from becoming too large */
-  height: 500px; /* Fixed height for the slider */
-  margin: 20px auto; /* Center the slider */
+// Array to hold image data (image source and description)
+const images = [
+    { src: 'images/gallery/old1.jpg'},
+    { src: 'images/gallery/old3.jpg'},
+    { src: 'images/gallery/old4.jpg'},
+    { src: 'images/gallery/old6.jpg'},
+    { src: 'images/gallery/old7.jpg'},
+    { src: 'images/gallery/old8.jpg'},
+    { src: 'images/gallery/old9.jpg'},
+    { src: 'images/gallery/old10.jpg'},
+    { src: 'images/gallery/old11.jpg'},
+    { src: 'images/gallery/old13.jpg'},
+    { src: 'images/gallery/old14.jpg'},
+    { src: 'images/gallery/old15.jpg'},
+    { src: 'images/gallery/old17.jpg'},
+    { src: 'images/gallery/old18.jpg'},
+    { src: 'images/gallery/misc1.jpg'},
+    { src: 'images/gallery/misc8.jpg'},
+    { src: 'images/gallery/misc9.jpg'},
+    { src: 'images/gallery/misc10.jpg'},
+    { src: 'images/gallery/misc11.jpg'},
+    { src: 'images/gallery/misc12.jpg'},
+    { src: 'images/gallery/misc13.jpg'},
+    { src: 'images/gallery/misc14.jpg'},
+    { src: 'images/gallery/misc15.jpg'},
+    { src: 'images/gallery/misc20.jpg'},
+    { src: 'images/gallery/misc21.jpg'},
+    { src: 'images/gallery/misc22.jpg'},
+    { src: 'images/gallery/ace1.jpg'},
+    { src: 'images/gallery/ace2.jpg'},
+    { src: 'images/gallery/ace3.jpg'},
+    { src: 'images/gallery/ace4.jpg'},
+    { src: 'images/gallery/ace7.jpg'},
+    { src: 'images/gallery/ace8.jpg'},
+
+
+
+    // Add more images if needed but also do not because it will lag :(
+    // Also GitHub can only upload 100 mb so I deleted some pictures from the gallery
+];
+
+// Function to load images dynamically into the gallery
+function loadGalleryImages() {
+    const galleryGrid = document.getElementById('gallery-grid');
+
+    images.forEach(image => {
+        const galleryItem = document.createElement('div');
+        galleryItem.classList.add('gallery-item');
+
+        // Create the image element
+        const img = document.createElement('img');
+        img.src = image.src;
+        img.alt = image.alt;
+
+        // Add click event to open the modal
+        img.onclick = () => openModal(image.src, image.description);
+
+        // Create the description element
+        const description = document.createElement('div');
+        description.classList.add('description');
+        description.textContent = image.description;
+
+        // Append image and description to the gallery item
+        galleryItem.appendChild(img);
+        galleryItem.appendChild(description);
+
+        // Append the gallery item to the gallery grid
+        galleryGrid.appendChild(galleryItem);
+    });
 }
 
-.slider {
-  display: flex; /* Display images in a row */
-  transition: transform 1.5s ease; /* Smooth transition effect */
+// Function to open the modal with the clicked image and description
+function openModal(imageSrc, imageDescription) {
+    const modal = document.getElementById('imageModal');
+    const modalImage = document.getElementById('modalImage');
+    const modalDescription = document.getElementById('modalDescription');
+
+    modal.style.display = 'block';
+    modalImage.src = imageSrc;
+    modalDescription.textContent = imageDescription;
 }
 
-.slide {
-  width: 100%; /* Each image takes up the full width of the container */
-  height: 100%; /* Maintain the height of the container */
-  object-fit: cover; /* Make sure images cover the space and don't stretch */
+// Function to close the modal
+function closeModal() {
+    const modal = document.getElementById('imageModal');
+    modal.style.display = 'none';
 }
 
-/* Navigation buttons */
-button {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  background-color: rgba(0, 0, 0, 0.5);
-  color: white;
-  border: none;
-  font-size: 30px;
-  padding: 10px;
-  cursor: pointer;
-  z-index: 10;
-}
+// Add event listener for the close button
+document.querySelector('.close').addEventListener('click', closeModal);
 
-button.prev {
-  left: 10px;
-}
-
-button.next {
-  right: 10px;
-}
-
-button:hover {
-  background-color: rgba(0, 0, 0, 0.8);
-}
-
-
-/* Location Section */
-.location {
-  padding: 10px;
-  text-align: center;
-  background-color: #9eeeb2;
-}
-
-.location iframe {
-  border-radius: 8px;
-  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
-  width: 100%; /* Make iframe responsive */
-  max-width: 600px; /* Set max width */
-  height: 400px;
-  border: none;
-}
-
-/* Footer Styling */
-footer {
-  background-color: #0a543b;
-  color: white;
-  padding: 10px 0;
-  text-align: center;
-  margin-top: 20px;
-}
-
-/* General Styling for Links */
-a {
-  color: #4CAF50;
-  text-decoration: none;
-}
-
-a:hover {
-  text-decoration: none;
-}
-
-/* Gallery Section */
-.gallery {
-  padding: 20px;
-  text-align: center;
-}
-
-.gallery h2 {
-  font-size: 2em;
-  margin-bottom: 20px;
-}
-
-.gallery-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); /* Auto-adjust the number of columns */
-  gap: 20px;
-  padding: 20px;
-}
-
-.gallery-item {
-  position: relative;
-  overflow: hidden;
-  border-radius: 10px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  width: 100%;
-  max-width: 250px;
-  height: 200px;
-  margin: 0 auto; /* Center the gallery item */
-}
-
-.gallery-item img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: transform 0.3s ease;
-}
-
-.gallery-item:hover {
-  transform: scale(1.05);
-  box-shadow: 10px 6px 12px rgba(0, 0, 0, 0.2);
-}
-
-.description {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  background: rgba(0, 0, 0, 0.6);
-  color: white;
-  padding: 10px;
-  text-align: center;
-  opacity: 0;
-  transition: opacity 0.3s ease;
-  font-size: 1.2em;
-}
-
-/* Modal for zoomed-in image */
-.modal {
-  display: none;
-  position: fixed;
-  z-index: 1;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.8);
-  overflow: auto;
-  text-align: center;
-}
-
-.modal-content {
-  max-width: 90%;
-  max-height: 90%;
-  margin-top: 50px;
-  transition: transform 0.3s ease;
-}
-
-.close {
-  position: absolute;
-  top: 20px;
-  right: 25px;
-  color: #fff;
-  font-size: 35px;
-  font-weight: bold;
-  cursor: pointer;
-}
-
-.close:hover,
-.close:focus {
-  color: #bbb;
-  text-decoration: none;
-  cursor: pointer;
-}
-
-.pagination {
-  display: flex;
-  justify-content: center;
-  margin-top: 20px;
-}
-
-.pagination a {
-  padding: 10px;
-  margin: 0 5px;
-  text-decoration: none;
-  background-color: #4CAF50;
-  color: white;
-  border-radius: 5px;
-  transition: background-color 0.3s ease;
-}
-
-.pagination a:hover {
-  background-color: #45a049;
-}
-
-.pagination a.active {
-  background-color: #3e8e41;
-}
-
-/* Contact Info Section */
-.contact-info {
-  display: flex;
-  flex-direction: column; /* Stack the form and social media icons vertically */
-  align-items: center; /* Center the content */
-  padding: 20px;
-  box-sizing: border-box;
-}
-
-/* Social Media Icons Styling */
-.contact-info ul {
-  list-style-type: none;
-  padding: 0;
-  margin-top: 20px; /* Add space between the text and the icons */
-  display: flex; /* Make the icons appear horizontally */
-  justify-content: center; /* Center the icons horizontally */
-}
-
-.contact-info ul li {
-  margin-left: 15px; /* Space between icons */
-}
-
-.contact-info ul li a {
-  display: inline-block;
-}
-
-.contact-info ul li a img.social-media-icon {
-  width: 40px; /* Set a consistent width */
-  height: 40px; /* Set a consistent height */
-  transition: transform 0.3s ease; /* Add a smooth hover effect */
-}
-
-.contact-info ul li a img.social-media-icon:hover {
-  transform: scale(1.1); /* Slight scale effect when hovered */
-}
-
-/* Adjusting Member Interest Form */
-#member-interest {
-  max-width: 600px; /* Control the form's width */
-  width: 100%; /* Ensure it’s responsive */
-  margin-right: 20px; /* Add some space between the form and the icons */
-}
-
-@media (max-width: 768px) {
-  /* Stack social media icons and form on smaller screens */
-  .contact-info {
-    flex-direction: column; /* Stack form and icons vertically */
-    align-items: center; /* Center everything */
-  }
-
-  .contact-info ul {
-    margin-top: 20px; /* Space between form and icons */
-  }
-
-  .contact-info ul li {
-    margin-left: 10px; /* Reduce margin between icons */
-  }
-
-  .contact-info ul li a img.social-media-icon {
-    width: 35px; /* Reduce icon size on small screens */
-    height: 35px;
-  }
-}
-
+// Call the function to load the images when the page loads
+window.onload = loadGalleryImages;

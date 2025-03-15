@@ -90,6 +90,19 @@ header {
     max-width: 800px; /* Set a max width to control text line length */
   }
 
+  /*Screen Sizes*/
+  @media (max-width: 1024px) { 
+    .intro h1, .intro p {
+      font-size: 15px; /* PC screens */
+    }
+  }
+
+  @media (max-width: 390px) {
+    .intro h1, .intro p {
+      font-size: 12px; /* Mobile Devices*/
+    }
+  }
+
   /* Footer Styling (if you want to add one later) */
   footer {
     background-color: #0a543b;
@@ -402,17 +415,5 @@ header {
 
 .pagination a.active {
     background-color: #3e8e41;
-}
-
-/* Example for an image */
-img {
-  width: 100%;
-  height: auto;
-}
-
-/* Example for a container */
-.container {
-  width: 80%;
-  margin: 0 auto;
 }
 

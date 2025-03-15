@@ -404,3 +404,15 @@ header {
     background-color: #3e8e41;
 }
 
+/* Example for an image */
+img {
+  width: 100%;
+  height: auto;
+}
+
+/* Example for a container */
+.container {
+  width: 80%;
+  margin: 0 auto;
+}
+

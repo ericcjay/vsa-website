@@ -128,7 +128,7 @@ function closeModal() {
 }
 
 // Add event listener for the close button
-document.querySelector('.close').addEventListener('click', closeModal);
+//document.querySelector('.close').addEventListener('click', closeModal);
 
 // Call the function to load the images when the page loads
 window.onload = loadGalleryImages;

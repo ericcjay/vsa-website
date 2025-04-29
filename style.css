@@ -61,6 +61,16 @@ header nav ul li a:hover {
   color: white; /* Text color change on hover */
 }
 
+/* Global Styling for Section Tags */
+section {
+  width: 75cqw;
+  margin:auto;
+}
+section > * {
+  width: 100%;
+  text-align: center;
+}
+
 /* About VSA Section Styles */
 .intro {
   display: flex;
@@ -353,15 +363,19 @@ a:hover {
   align-items: center; /* Center the content */
   padding: 20px;
   box-sizing: border-box;
+  max-width: 90cqw;
+  margin:auto;
 }
 
 /* Social Media Icons Styling */
 .contact-info ul {
   list-style-type: none;
   padding: 0;
-  margin-top: 20px; /* Add space between the text and the icons */
-  display: flex; /* Make the icons appear horizontally */
-  justify-content: center; /* Center the icons horizontally */
+  margin-top: 20px;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  max-width: 350px;
 }
 
 .contact-info ul li {
@@ -373,8 +387,6 @@ a:hover {
 }
 
 .contact-info ul li a img.social-media-icon {
-  width: 40px; /* Set a consistent width */
-  height: 40px; /* Set a consistent height */
   transition: transform 0.3s ease; /* Add a smooth hover effect */
 }
 
@@ -382,12 +394,22 @@ a:hover {
   transform: scale(1.1); /* Slight scale effect when hovered */
 }
 
-/* Adjusting Member Interest Form */
-#member-interest {
-  max-width: 600px; /* Control the form's width */
-  width: 100%; /* Ensure it’s responsive */
-  margin-right: 20px; /* Add some space between the form and the icons */
+/* Individual sizes for icons */
+.contact-info ul li a img.instagram {
+  width: 40px; 
+  height: 40px;
 }
+
+.contact-info img.discord {
+  width: 100px;
+}
+
+.contact-info img.flickr {
+  width: 80px;
+}
+
+/* Adjusting Member Interest Form */
+
 
 @media (max-width: 768px) {
   /* Stack social media icons and form on smaller screens */

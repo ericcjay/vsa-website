@@ -432,3 +432,18 @@ a:hover {
   }
 }
 
+/* Adjusting thye bullet points for the newsletter */
+
+.newsletter-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 1rem;
+  text-align: center;
+}
+
+.newsletter-entry ul {
+  display: inline-block;
+  text-align: left;
+  padding-left: 1.2rem;
+  list-style-position: outside;
+}
